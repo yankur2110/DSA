@@ -1,2 +1,3 @@
 # LeetCodeSolutions
-java leetcode solutions.
+leetcode solutions,
+language: java.
