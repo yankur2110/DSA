@@ -1,18 +1,14 @@
 public class Solution {
-    // you need treat n as an unsigned value
-    public int reverseBits(int n) {
-       
-      int  result = 0;
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
         
+        int count =0;
         for(int i=0;i<32;i++){
-            
-            int lsb = n&1;
-            int reverseLsb=lsb<<(31-i);
-            n=n>>1;
-            result = result | reverseLsb;
-            
+            int m = n&1;
+            if(m==1)
+                count++;
+            n>>=1;
         }
-        
-     return result;
+        return count;
     }
 }
