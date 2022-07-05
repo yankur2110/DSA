@@ -1,0 +1,32 @@
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int[] resultArray = new int[nums.length];
+
+        int start=0, end=0, counter=0;
+
+        while(start<=nums.length-1 && nums[start]<0){
+            start++;
+        }
+
+        start--;
+        end=start+1;
+
+        while(start>=0 && end<=nums.length-1){
+            if(Math.abs(nums[end]) <= Math.abs(nums[start])){
+                resultArray[counter++]=nums[end]*nums[end++];
+            }else{
+                resultArray[counter++]=nums[start]*nums[start--];
+            }
+        }
+
+        while(start>=0){
+            resultArray[counter++]=nums[start]*nums[start--];
+        }
+
+        while(end<=nums.length-1){
+            resultArray[counter++]=nums[end]*nums[end++];
+        }
+
+        return resultArray;
+    }
+}
