@@ -1,46 +1,18 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
-    String result = new String();
-    public String smallestFromLeaf(TreeNode root) {
-        dfs(root, new StringBuilder());
-        return result;
-    }
+    public int findLength(int[] nums1, int[] nums2) {
+        int n1=nums1.length, n2=nums2.length;
+        int[][] dp = new int[n1+1][n2+1]; //length of common subarray ending at nums1[i], nums2[j].
 
-    public void dfs(TreeNode root, StringBuilder currString){
-        if(root==null) return;
-
-        if(root.left==null && root.right==null){
-            char ch = (char)(root.val + 'a');
-            currString.append(ch);
-            currString = currString.reverse();
-
-            if(result.length()==0 || (currString.toString()).compareTo(result)<0){
-                result=currString.toString();
+        int max=0;
+        for(int i=1;i<=n1;i++){
+            for(int j=1;j<=n2;j++){
+                if(nums1[i-1]==nums2[j-1]){
+                    dp[i][j]=dp[i-1][j-1]+1; //maximum common subarray length before current numbers from nums1 and num2.
+                    max=Math.max(max, dp[i][j]);
+                }
             }
-
-            currString.deleteCharAt(0);
-            currString = currString.reverse();
-            return;
         }
-        char ch = (char)(root.val + 'a');
-        currString.append(ch);
-        dfs(root.left, currString);
-        dfs(root.right, currString);
-        currString.deleteCharAt(currString.length()-1);
 
+        return max;
     }
 }
